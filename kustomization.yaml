@@ -1,7 +1,7 @@
 resources:
-  - ../postgres
-  - ../adminer
-  - ../wikijs
+  - ./postgres
+  - ./adminer
+  - ./wikijs
   - ingress.yaml
 
 vars:

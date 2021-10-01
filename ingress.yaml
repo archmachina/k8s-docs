@@ -8,17 +8,17 @@ metadata:
     nginx.ingress.kubernetes.io/whitelist-source-range: "0.0.0.0/0"
 spec:
   tls:
-  - hosts:
-    - "docs.local"
-    secretName: wikijs-web-cert
+    - hosts:
+        - "docs.local"
+      secretName: wikijs-web-cert
   rules:
-  - host: "docs.local"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: wikijs-svc
-            port:
-              number: 80
+    - host: "docs.local"
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: wikijs-svc
+                port:
+                  number: 80
