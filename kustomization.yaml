@@ -1,0 +1,59 @@
+resources:
+  - ../postgres
+  - ../adminer
+  - ../wikijs
+  - ingress.yaml
+
+vars:
+  - name: POSTGRES_SVC
+    objref:
+      apiVersion: v1
+      kind: Service
+      name: postgres-svc
+
+secretGenerator:
+  - name: wikijs-web-cert
+    type: kubernetes.io/tls
+
+patches:
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: adminer-dp
+      spec:
+        template:
+          spec:
+            containers:
+              - name: adminer
+                env:
+                  - name: ADMINER_DEFAULT_SERVER
+                    value: "$(POSTGRES_SVC)"
+  - patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        name: wikijs-dp
+      spec:
+        template:
+          spec:
+            containers:
+              - name: wikijs
+                env:
+                  - name: DB_HOST
+                    value: "$(POSTGRES_SVC)"
+                  - name: DB_NAME
+                    value: "docs"
+  - patch: |-
+      apiVersion: apps/v1
+      kind: StatefulSet
+      metadata:
+        name: postgres-ss
+      spec:
+        template:
+          spec:
+            containers:
+              - name: postgres
+                env:
+                  - name: POSTGRES_DB
+                    value: "docs"

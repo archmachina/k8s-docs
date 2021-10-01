@@ -1,0 +1,9 @@
+[submodule "postgres"]
+	path = postgres
+	url = https://github.com/noveris-inf/k8s-postgres
+[submodule "wikijs"]
+	path = wikijs
+	url = https://github.com/noveris-inf/k8s-wikijs
+[submodule "adminer"]
+	path = adminer
+	url = https://github.com/noveris-inf/k8s-adminer
