@@ -1,1 +1,1 @@
-# k8s-docsite
+# kustomize-docs
